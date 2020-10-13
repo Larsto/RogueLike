@@ -32,17 +32,17 @@ public class Room : MonoBehaviour
                     i--;
                 }
             }
-
-            if(enemies.Count == 0)
+          
+        }
+        if (enemies.Count == 0)
+        {
+            foreach (GameObject door in doors)
             {
-                foreach (GameObject door in doors)
-                {
-                    door.SetActive(false);
+                door.SetActive(false);
 
-                    closeWhenEntered = false;
-                }
+                closeWhenEntered = false;
             }
-        }   
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
