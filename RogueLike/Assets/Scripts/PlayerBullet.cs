@@ -25,12 +25,16 @@ public class PlayerBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Instantiate(impactEffect, transform.position, transform.rotation);
-        if(other.tag == "Enemy")
+
+        Destroy(gameObject);
+
+        AudioManager.instance.PlaySFX(4);
+
+        if (other.tag == "Enemy")
         {
             other.GetComponent<EnemyController>().DamageEnemy(damageToGive);
         }
      
-        Destroy(gameObject);
     }
 
     private void OnBecameInvisible()

@@ -47,6 +47,7 @@ public class PlayerHealthController : MonoBehaviour
             currentHealth--;
 
             invincCount = damageInvincLength;
+            AudioManager.instance.PlaySFX(11);
 
             PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, 0.5f);
             if (currentHealth <= 0)
@@ -54,11 +55,31 @@ public class PlayerHealthController : MonoBehaviour
                 PlayerController.instance.gameObject.SetActive(false);
 
                 UIController.instance.deathScreen.SetActive(true);
+
+                AudioManager.instance.PlayGameOver();
+                AudioManager.instance.PlaySFX(9);
             }
 
             UIController.instance.healthSlider.value = currentHealth;
             UIController.instance.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
         }
       
+    }
+    public void MakeInvincible(float length)
+    {
+        invincCount = length;
+        PlayerController.instance.bodySR.color = new Color(PlayerController.instance.bodySR.color.r, PlayerController.instance.bodySR.color.g, PlayerController.instance.bodySR.color.b, 0.5f);
+    }
+
+    public void HealPlayer(int healAmount)
+    {
+        currentHealth += healAmount;
+        AudioManager.instance.PlaySFX(7);
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+        UIController.instance.healthSlider.value = currentHealth;
+        UIController.instance.healthText.text = currentHealth.ToString() + " / " + maxHealth.ToString();
     }
 }
