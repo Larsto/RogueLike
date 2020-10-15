@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
-    public static PlayerController instance;
+    public static PlayerController2 instance;
     public float moveSpeed = 5f;
     private Vector2 moveInput;
     public Rigidbody2D theRB;
-    public Transform gunArm;
+    //public Transform gunArm;
 
     private Camera theCam;
 
@@ -59,42 +59,42 @@ public class PlayerController : MonoBehaviour
 
             Vector3 mousePos = Input.mousePosition;
             Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+            /*
+          if (mousePos.x < screenPoint.x)
+          {
+              transform.localScale = new Vector3(-1f, 1f, 1f);
+              gunArm.localScale = new Vector3(-1f, -1f, 1f);
+          }
+          else
+          {
+              transform.localScale = Vector3.one;
+              gunArm.localScale = Vector3.one;
+          }
 
-            if (mousePos.x < screenPoint.x)
-            {
-                transform.localScale = new Vector3(-1f, 1f, 1f);
-                gunArm.localScale = new Vector3(-1f, -1f, 1f);
-            }
-            else
-            {
-                transform.localScale = Vector3.one;
-                gunArm.localScale = Vector3.one;
-            }
-
-            //rotate gunArm
-            Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
-            float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-            gunArm.rotation = Quaternion.Euler(0f, 0f, angle);
-
+          //rotate gunArm
+          Vector2 offset = new Vector2(mousePos.x - screenPoint.x, mousePos.y - screenPoint.y);
+          float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
+          gunArm.rotation = Quaternion.Euler(0f, 0f, angle);
+            */
             if (Input.GetMouseButtonDown(0))
-            {
-                Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                shotCounter = timeBetweenShots;
-                AudioManager.instance.PlaySFX(12);
-            }
+          {
+              Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+              shotCounter = timeBetweenShots;
+              AudioManager.instance.PlaySFX(12);
+          }
 
-            if (Input.GetMouseButton(0))
-            {
-                shotCounter -= Time.deltaTime;
+          if (Input.GetMouseButton(0))
+          {
+              shotCounter -= Time.deltaTime;
 
-                if (shotCounter <= 0)
-                {
-                    Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                    shotCounter = timeBetweenShots;
-                    AudioManager.instance.PlaySFX(12);
-                }
-            }
-
+              if (shotCounter <= 0)
+              {
+                  Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+                  shotCounter = timeBetweenShots;
+                  AudioManager.instance.PlaySFX(12);
+              }
+          }
+          
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (dashCoolCounter <= 0 && dashCounter <= 0)

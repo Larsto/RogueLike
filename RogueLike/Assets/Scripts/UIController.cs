@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class UIController : MonoBehaviour
     public Image fadeScreen;
     public float fadeSpeed;
     private bool fadeToBlack, fadeOutOfBlack;
+
+    public string newGameScene, mainMenuScene;
+
+    public GameObject pauseMenu;
 
     private void Awake()
     {
@@ -53,5 +58,22 @@ public class UIController : MonoBehaviour
     {
         fadeToBlack = true;
         fadeOutOfBlack = false;
+    }
+
+    public void NewGame()
+    {
+        SceneManager.LoadScene(newGameScene);
+        Time.timeScale = 1f;
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(mainMenuScene);
+        Time.timeScale = 1f;
+    }
+
+    public void Resume()
+    {
+        LevelManager.instance.PauseUnpause();
     }
 }

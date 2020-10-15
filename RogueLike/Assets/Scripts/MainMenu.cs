@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelExit : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
-    //public string levelToLoad;
+    public string levelToLoad;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +18,13 @@ public class LevelExit : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void StartGame()
     {
-        if(other.tag == "Player")
-        {
-            StartCoroutine(LevelManager.instance.LevelEnd());
-        }
+        SceneManager.LoadScene(levelToLoad);
+        Time.timeScale = 1f;
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
