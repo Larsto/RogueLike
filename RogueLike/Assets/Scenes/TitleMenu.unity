@@ -637,7 +637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bdb7001bf10142a28183b711b66a687, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelToLoad: Test
+  levelToLoad: LevelTest
 --- !u!224 &1322693637 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1110147529663956491, guid: 28a53434175024e139f9cb686b391328, type: 3}

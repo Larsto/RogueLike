@@ -27,10 +27,19 @@ public class EnemyController2 : MonoBehaviour
     public float shootRange;
 
     public SpriteRenderer theBody;
+
+    private bool facingRight = true;
+    private float oldPosition;
+    private float newPosition;
+    private float hitTime;
+    public float setHitTime = 1;
+    public float minDistance = 2f;
+    public float meleeRange;
+    public LayerMask playerLayer;
     // Start is called before the first frame update
     void Start()
     {
-
+        oldPosition = transform.position.x;
     }
 
     // Update is called once per frame
@@ -38,7 +47,13 @@ public class EnemyController2 : MonoBehaviour
     {
         if (theBody.isVisible && PlayerController2.instance.gameObject.activeInHierarchy)
         {
-            if (Vector3.Distance(transform.position, PlayerController2.instance.transform.position) < rangeToChacePlayer)
+            if (Vector3.Distance(transform.position, PlayerController2.instance.transform.position) < minDistance)
+                
+            {
+                Hit();
+                moveDirection = Vector3.zero;
+            }
+            else if (Vector3.Distance(transform.position, PlayerController2.instance.transform.position) < rangeToChacePlayer)
             {
                 moveDirection = PlayerController2.instance.transform.position - transform.position;
             }
@@ -76,7 +91,37 @@ public class EnemyController2 : MonoBehaviour
         {
             anim.SetBool("isMoving", false);
         }
+        newPosition = oldPosition;
 
+        if (transform.position.x > oldPosition && facingRight)
+        {
+            Flip();
+        }
+            
+        if (transform.position.x < oldPosition && !facingRight)
+        {
+            Flip();
+        }
+            
+        oldPosition = transform.position.x;
+
+    }
+
+
+    private void Hit()
+    {
+        hitTime -= Time.deltaTime;
+        if (hitTime <= 0)
+        {
+            AudioManager.instance.PlaySFX(4);
+            anim.SetTrigger("Hit");
+            hitTime = setHitTime;
+            if(Physics2D.OverlapCircle(firePoint.position, meleeRange, playerLayer))
+            {
+                PlayerHealthController2.instance.DamagePlayer();
+            }
+            
+        } 
     }
 
     public void DamageEnemy(int damage)
@@ -85,6 +130,8 @@ public class EnemyController2 : MonoBehaviour
 
         AudioManager.instance.PlaySFX(2);
 
+        anim.SetTrigger("Hurt");
+        hitTime = setHitTime;
         Instantiate(hitEffect, transform.position, transform.rotation);
 
         if (health <= 0)
@@ -99,5 +146,21 @@ public class EnemyController2 : MonoBehaviour
             Instantiate(deathSplatters[selectedSplatter], transform.position, Quaternion.Euler(0f, 0f, rotation * 90));
         }
     }
+    /*
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerHealthController2.instance.DamagePlayer();
 
+        }
+    }
+    */
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+    }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783472071954212585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.47, y: 0, z: 0}
+  m_LocalPosition: {x: -0.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 922861053189870942}
@@ -122,9 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 922861053189870942}
   - component: {fileID: 4694710143742440564}
+  - component: {fileID: 6221416926054431038}
   - component: {fileID: 1783472070872694835}
   - component: {fileID: 1783472070872694839}
-  - component: {fileID: 6221416926054431038}
   m_Layer: 10
   m_Name: Enemy - Skeleton2
   m_TagString: Enemy
@@ -174,6 +174,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &6221416926054431038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040900254817914489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 182b2ed1df4ca477698756e18e6e9aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theRB: {fileID: 1783472070872694835}
+  moveSpeed: 2
+  rangeToChacePlayer: 5
+  anim: {fileID: 1783472070872694839}
+  health: 150
+  deathSplatters:
+  - {fileID: 3569125046486696396, guid: 31b184bf83d098742a091949b6c21a6f, type: 3}
+  - {fileID: 3995001554091200293, guid: cc9401434fb5cbc4891b8d8a9ce7283f, type: 3}
+  - {fileID: 777513546634490703, guid: f7d705b305e06ac4d8a224eb0e94e9f2, type: 3}
+  - {fileID: 2103641911797783393, guid: b814e77f674a72949828c5cb8331b92d, type: 3}
+  hitEffect: {fileID: 8783243727267542273, guid: fb2c20cdc5b532c40891cb87197b656c, type: 3}
+  shouldShoot: 0
+  bullet: {fileID: 6230168588862804004, guid: 48d042d0ca9284835bfca1d93c00e3f7, type: 3}
+  firePoint: {fileID: 1783472071954212590}
+  fireRate: 0.5
+  shootRange: 10
+  theBody: {fileID: 1658418550492762678}
+  setHitTime: 0.5
+  minDistance: 1
+  meleeRange: 0.5
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!50 &1783472070872694835
 Rigidbody2D:
   serializedVersion: 4
@@ -214,28 +249,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6221416926054431038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7040900254817914489}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 182b2ed1df4ca477698756e18e6e9aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  theRB: {fileID: 1783472070872694835}
-  moveSpeed: 3
-  rangeToChacePlayer: 5
-  anim: {fileID: 1783472070872694839}
-  health: 150
-  deathSplatters: []
-  hitEffect: {fileID: 8783243727267542273, guid: fb2c20cdc5b532c40891cb87197b656c, type: 3}
-  shouldShoot: 0
-  bullet: {fileID: 4397280223351970923, guid: 7638b3b3636a50a4a929fcb2f4daebdf, type: 3}
-  firePoint: {fileID: 1783472071954212590}
-  fireRate: 1
-  shootRange: 10
-  theBody: {fileID: 1658418550492762678}

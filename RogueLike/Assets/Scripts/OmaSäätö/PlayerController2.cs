@@ -14,10 +14,16 @@ public class PlayerController2 : MonoBehaviour
 
     public Animator anim;
 
+    public float meleeRange;
+    public int meleeDamage = 50;
+    public LayerMask enemyLayer;
+    public LayerMask breakableLayer;
+
     public GameObject bulletToFire;
     public Transform firePoint;
 
     public float timeBetweenShots;
+    public float timeBetweenHits;
     private float shotCounter;
 
     public SpriteRenderer bodySR;
@@ -30,6 +36,8 @@ public class PlayerController2 : MonoBehaviour
 
     [HideInInspector]
     public bool canMove = true;
+
+    private bool facingRight = true;
 
     // Start is called before the first frame update
 
@@ -56,10 +64,10 @@ public class PlayerController2 : MonoBehaviour
 
             theRB.velocity = moveInput * activeMoveSpeed;
             //transform.position += new Vector3(moveInput.x, moveInput.y, 0f) * moveSpeed * Time.deltaTime;
-
+            /*
             Vector3 mousePos = Input.mousePosition;
             Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
-            /*
+            
           if (mousePos.x < screenPoint.x)
           {
               transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -76,24 +84,42 @@ public class PlayerController2 : MonoBehaviour
           float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
           gunArm.rotation = Quaternion.Euler(0f, 0f, angle);
             */
-            if (Input.GetMouseButtonDown(0))
-          {
-              Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-              shotCounter = timeBetweenShots;
-              AudioManager.instance.PlaySFX(12);
-          }
-
-          if (Input.GetMouseButton(0))
-          {
-              shotCounter -= Time.deltaTime;
-
-              if (shotCounter <= 0)
-              {
-                  Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
-                  shotCounter = timeBetweenShots;
-                  AudioManager.instance.PlaySFX(12);
-              }
-          }
+            if (shotCounter > 0)
+            {
+                shotCounter -= Time.deltaTime;
+            }
+                
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                if (shotCounter <= 0)
+                {
+                    Instantiate(bulletToFire, firePoint.position, firePoint.rotation);
+                    shotCounter = timeBetweenShots;
+                    AudioManager.instance.PlaySFX(12);
+                    anim.SetTrigger("Shoot");
+                }
+            }
+        
+    
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                if (shotCounter <= 0)
+                {
+                    AudioManager.instance.PlaySFX(12);
+                    anim.SetTrigger("Hit1");
+                    shotCounter = timeBetweenHits;
+                    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(firePoint.position, meleeRange, enemyLayer);
+                    foreach (Collider2D enemy in hitEnemies)
+                    {
+                        enemy.GetComponent<EnemyController2>().DamageEnemy(meleeDamage);
+                    }
+                    Collider2D[] hitBreakable = Physics2D.OverlapCircleAll(firePoint.position, meleeRange, breakableLayer);
+                    foreach (Collider2D breakable in hitBreakable)
+                    {
+                        breakable.GetComponent<Breakables2>().Smash();
+                    }
+                }
+            }
           
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -102,7 +128,7 @@ public class PlayerController2 : MonoBehaviour
                     activeMoveSpeed = dashSpeed;
                     dashCounter = dashLength;
                     anim.SetTrigger("Dash");
-                    PlayerHealthController.instance.MakeInvincible(dashInvinsibility);
+                    PlayerHealthController2.instance.MakeInvincible(dashInvinsibility);
                     AudioManager.instance.PlaySFX(8);
                 }
             }
@@ -130,11 +156,35 @@ public class PlayerController2 : MonoBehaviour
             {
                 anim.SetBool("isMoving", false);
             }
+            if (facingRight == false && moveInput.x > 0)
+            {
+                Flip();
+            }
+            else if (facingRight == true && moveInput.x < 0)
+            {
+                Flip();
+            }
         }
         else
         {
             theRB.velocity = Vector2.zero;
             anim.SetBool("isMoving", false);
         }
+    }
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 Scaler = transform.localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+        if (facingRight)
+        {
+            firePoint.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            firePoint.rotation = Quaternion.Euler(0f, 0f, 180f);
+        }
+        
     }
 }
