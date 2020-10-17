@@ -34,7 +34,7 @@ public class PlayerController2 : MonoBehaviour
     public float dashCounter;
     private float dashCoolCounter;
 
-    [HideInInspector]
+  
     public bool canMove = true;
 
     private bool facingRight = true;
@@ -55,7 +55,7 @@ public class PlayerController2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canMove && !LevelManager.instance.isPaused)
+        if (canMove && !LevelManager2.instance.isPaused)
         {
             moveInput.x = Input.GetAxisRaw("Horizontal");
             moveInput.y = Input.GetAxisRaw("Vertical");

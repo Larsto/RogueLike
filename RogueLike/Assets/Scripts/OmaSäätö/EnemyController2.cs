@@ -133,7 +133,7 @@ public class EnemyController2 : MonoBehaviour
         anim.SetTrigger("Hurt");
         hitTime = setHitTime;
         Instantiate(hitEffect, transform.position, transform.rotation);
-
+        rangeToChacePlayer = 10;
         if (health <= 0)
         {
             Destroy(gameObject);
