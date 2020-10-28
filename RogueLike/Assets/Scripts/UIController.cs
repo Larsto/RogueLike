@@ -23,6 +23,8 @@ public class UIController : MonoBehaviour
     public Image currentGun;
     public Text gunText;
 
+    public Slider bossHealthBar;
+
     private void Awake()
     {
         instance = this;
@@ -32,6 +34,9 @@ public class UIController : MonoBehaviour
     {
         fadeOutOfBlack = true;
         fadeToBlack = false;
+
+        currentGun.sprite = PlayerController.instance.availableGuns[PlayerController.instance.currentGun].gunUI;
+        gunText.text = PlayerController.instance.availableGuns[PlayerController.instance.currentGun].weaponName;
     }
 
     // Update is called once per frame
@@ -66,12 +71,14 @@ public class UIController : MonoBehaviour
     {
         SceneManager.LoadScene(newGameScene);
         Time.timeScale = 1f;
+        Destroy(PlayerController.instance.gameObject);
     }
 
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene(mainMenuScene);
         Time.timeScale = 1f;
+        Destroy(PlayerController.instance.gameObject);
     }
 
     public void Resume()

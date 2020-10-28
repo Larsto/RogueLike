@@ -110,7 +110,7 @@ Transform:
   m_LocalPosition: {x: -0.02, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8365845610759242432}
+  - {fileID: 5902059494058511353}
   m_Father: {fileID: 2218277063280793361}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 2218277063280793367}
   - component: {fileID: 2218277063280793364}
   m_Layer: 8
-  m_Name: Player
+  m_Name: Player - Snake
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,9 +466,6 @@ MonoBehaviour:
   theRB: {fileID: 2218277063280793367}
   gunArm: {fileID: 2218277061474399982}
   anim: {fileID: 2218277063280793364}
-  bulletToFire: {fileID: 9100021186358344841, guid: 9add4d414352b40e0a3c99bb90590315, type: 3}
-  firePoint: {fileID: 0}
-  timeBetweenShots: 0.5
   bodySR: {fileID: 2218277062606910256}
   dashSpeed: 8
   dashLength: 0.5
@@ -476,6 +473,9 @@ MonoBehaviour:
   dashInvinsibility: 0.5
   dashCounter: 0
   canMove: 1
+  availableGuns:
+  - {fileID: 3737734899291607008}
+  currentGun: 0
 --- !u!58 &2218277063280793366
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -532,7 +532,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!1001 &5495353467864803718
+--- !u!1001 &7616234898563424447
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -553,15 +553,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4060591683423316806, guid: 92b239863fd624982ae892437b79392b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4060591683423316806, guid: 92b239863fd624982ae892437b79392b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4060591683423316806, guid: 92b239863fd624982ae892437b79392b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4060591683423316806, guid: 92b239863fd624982ae892437b79392b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -589,8 +589,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92b239863fd624982ae892437b79392b, type: 3}
---- !u!4 &8365845610759242432 stripped
+--- !u!4 &5902059494058511353 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4060591683423316806, guid: 92b239863fd624982ae892437b79392b, type: 3}
-  m_PrefabInstance: {fileID: 5495353467864803718}
+  m_PrefabInstance: {fileID: 7616234898563424447}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3737734899291607008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2707411731988795553, guid: 92b239863fd624982ae892437b79392b, type: 3}
+  m_PrefabInstance: {fileID: 7616234898563424447}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001c9b079e5f74771851a8cd54dc5aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

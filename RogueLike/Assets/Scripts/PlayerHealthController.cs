@@ -19,7 +19,9 @@ public class PlayerHealthController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        maxHealth = CharacterTracker.instance.maxHealth;
+        currentHealth = CharacterTracker.instance.currentHealt; ;
+        //currentHealth = maxHealth;
 
         UIController.instance.healthSlider.maxValue = maxHealth;
         UIController.instance.healthSlider.value = currentHealth;

@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001c9b079e5f74771851a8cd54dc5aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletToFire: {fileID: 2446097205267289256, guid: 5f9be7a29cb894e30b7bced4fa70a6d2, type: 3}
+  bulletToFire: {fileID: 3910936412909465049, guid: 3de84855e20f44374a9047a2d4f900a2, type: 3}
   firePoint: {fileID: 3362053512291507666}
   timeBetweenShots: 0.2
   weaponName: Machine Gun

@@ -2170,10 +2170,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buyMessage: {fileID: 7278591385670652180}
   isHealthRestore: 0
-  isHealthUpgrade: 1
-  isWeapon: 0
+  isHealthUpgrade: 0
+  isWeapon: 1
   itemCost: 15
   healthUpgradeAmount: 5
+  potentialGun:
+  - {fileID: 3904455670106721757, guid: 7b3109e87ddd44ed8bff6e428999dbdf, type: 3}
+  - {fileID: -2707411731988795553, guid: 92b239863fd624982ae892437b79392b, type: 3}
+  - {fileID: 7983640930183616695, guid: 0af555808c4e4423cb6eb0a2b06fd4c2, type: 3}
+  gunSprite: {fileID: 904555738112400497}
+  infoText: {fileID: 1576421373047209447}
 --- !u!1 &6500728081394557527
 GameObject:
   m_ObjectHideFlags: 0
@@ -2839,6 +2845,9 @@ MonoBehaviour:
   isWeapon: 0
   itemCost: 15
   healthUpgradeAmount: 5
+  potentialGun: []
+  gunSprite: {fileID: 0}
+  infoText: {fileID: 0}
 --- !u!1 &8192727469975147980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,6 +2977,9 @@ MonoBehaviour:
   isWeapon: 0
   itemCost: 5
   healthUpgradeAmount: 0
+  potentialGun: []
+  gunSprite: {fileID: 0}
+  infoText: {fileID: 0}
 --- !u!1 &8192727470132356240
 GameObject:
   m_ObjectHideFlags: 0

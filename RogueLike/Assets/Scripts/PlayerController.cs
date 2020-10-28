@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D theRB;
     public Transform gunArm;
 
-    private Camera theCam;
+    //private Camera theCam;
 
     public Animator anim;
     /*
@@ -40,10 +40,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        DontDestroyOnLoad(gameObject);
     }
     void Start()
     {
-        theCam = Camera.main;
+        //theCam = Camera.main;
 
         activeMoveSpeed = moveSpeed;
 
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
             //transform.position += new Vector3(moveInput.x, moveInput.y, 0f) * moveSpeed * Time.deltaTime;
 
             Vector3 mousePos = Input.mousePosition;
-            Vector3 screenPoint = theCam.WorldToScreenPoint(transform.localPosition);
+            Vector3 screenPoint = CameraController.instance.mainCamera.WorldToScreenPoint(transform.localPosition);
 
             if (mousePos.x < screenPoint.x)
             {
